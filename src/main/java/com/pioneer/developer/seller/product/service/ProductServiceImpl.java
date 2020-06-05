@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -42,8 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-	private final HttpSession session;
-	private final HttpServletRequest request;
+	private final ServletContext context;
 	private final ProductMapper productMapper;
 
 	@Value("${file.path.user}")
@@ -51,14 +48,10 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void addProduct(ProductDto productDto) throws Exception {
-		ServletContext context = session.getServletContext();
-		context.getRealPath(request.getContextPath());
-		log.info("######### >>> REALDPATH : " + context.getRealPath(request.getContextPath()));
 		log.info(" >>>>>> SAVE PATH : " + savePath);
 		log.info(" >>>> REAL PATH : " + context.getRealPath(savePath));
 
 		String imageFolder = context.getRealPath(savePath);
-		
 
 		MultipartFile mainImg = productDto.getMainImg();
 
@@ -75,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
 			productDto.setPhoto1name(mainImgName + extension);
 
 			// 상품 썸네일 - 270x270
-			ImageUtils.resizeImg(mainImgFile, imageFolder + "/thumbnail/", extension, mainImgName, 270, 270);
+			ImageUtils.resizeImg(mainImgFile, "/web/lib/thumbnail/", extension, mainImgName, 270, 270);
 			// 상품 상세 - 440x590
 			ImageUtils.resizeImg(mainImgFile, imageFolder + "/big/", extension, mainImgName, 440, 590);
 			// 상품 상세 - 120x140
