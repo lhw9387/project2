@@ -51,7 +51,8 @@ public class ProductServiceImpl implements ProductService {
 		log.info(" >>>>>> SAVE PATH : " + savePath);
 		log.info(" >>>> REAL PATH : " + context.getRealPath(savePath));
 
-		String imageFolder = context.getRealPath(savePath);
+		String imageFolder = context.getRealPath("/");
+		log.info(imageFolder);
 
 		MultipartFile mainImg = productDto.getMainImg();
 
@@ -68,11 +69,11 @@ public class ProductServiceImpl implements ProductService {
 			productDto.setPhoto1name(mainImgName + extension);
 
 			// 상품 썸네일 - 270x270
-			ImageUtils.resizeImg(mainImgFile, imageFolder + "/thumbnail/", extension, mainImgName, 270, 270);
+			ImageUtils.resizeImg(mainImgFile, "/web/images/thumbnail/", extension, mainImgName, 270, 270);
 			// 상품 상세 - 440x590
-			ImageUtils.resizeImg(mainImgFile, imageFolder + "/big/", extension, mainImgName, 440, 590);
+			ImageUtils.resizeImg(mainImgFile, "/web/images/big/", extension, mainImgName, 440, 590);
 			// 상품 상세 - 120x140
-			ImageUtils.resizeImg(mainImgFile, imageFolder + "/small/", extension, mainImgName, 120, 140);
+			ImageUtils.resizeImg(mainImgFile, "/web/images/small/", extension, mainImgName, 120, 140);
 		}
 
 		MultipartFile[] subImg = productDto.getSubImg();

@@ -55,9 +55,9 @@ public class NoticeServiceImpl implements NoticeService {
          noticeWriteDto.setNotice_filename(mainImgName + extension);
 
          // 공지사항 리스트 - 370x347
-         ImageUtils.resizeImg(mainImgFile, imageFolder + "/notice/list/", extension, mainImgName, 370, 347);
+         ImageUtils.resizeImg(mainImgFile, "/web/images/notice/list/", extension, mainImgName, 370, 347);
          // 공지사항 상세 - 1170x555
-         ImageUtils.resizeImg(mainImgFile, imageFolder + "/notice/detail/", extension, mainImgName, 1170, 555);
+         ImageUtils.resizeImg(mainImgFile, "/web/images/notice/detail/", extension, mainImgName, 1170, 555);
       }
 
       noticeMapper.addNotice(noticeWriteDto);

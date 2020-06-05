@@ -50,9 +50,9 @@ public class ImageUtils {
 
 		File destFolder = new File(destPath);
 
-		if (!destFolder.exists()) { // 폴더 없으면 생성
-			destFolder.mkdirs();
-		}
+//		if (!destFolder.exists()) { // 폴더 없으면 생성
+//			destFolder.mkdirs();
+//		}
 
 		Image src = ImageIO.read(srcFile);
 
