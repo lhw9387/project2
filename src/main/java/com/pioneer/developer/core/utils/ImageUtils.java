@@ -24,7 +24,8 @@ public class ImageUtils {
 	 */
 
 	public static File multipartFileToFile(MultipartFile file) throws IOException {
-		File convFile = new File(System.getProperty("java.io.tmpdir") + "\\" + file.getOriginalFilename());
+		log.info("System.getProperty(java.io.tmpdir)) :" + System.getProperty("java.io.tmpdir"));
+		File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + file.getOriginalFilename());
 		convFile.createNewFile();
 		FileOutputStream fos = new FileOutputStream(convFile);
 		fos.write(file.getBytes());
@@ -49,9 +50,9 @@ public class ImageUtils {
 
 		File destFolder = new File(destPath);
 
-//		if (!destFolder.exists()) { // 폴더 없으면 생성
-//			destFolder.mkdirs();
-//		}
+		if (!destFolder.exists()) { // 폴더 없으면 생성
+			destFolder.mkdirs();
+		}
 
 		Image src = ImageIO.read(srcFile);
 
