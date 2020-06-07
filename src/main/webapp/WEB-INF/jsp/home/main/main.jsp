@@ -1383,7 +1383,5 @@ setInterval(function() {
  });
 }, 500);
 
-
-
 </script>
         <!-- End Blog Area -->
