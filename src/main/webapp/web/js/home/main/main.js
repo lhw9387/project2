@@ -74,51 +74,7 @@
 		    });
 	}
 
-	$(document).ready(function() {
-		getNoticeList();
 
-    /* #=========================================#
-    | 슬라이드  - Slider Pro |
-    * https://github.com/bqworks/slider-pro
-    #=========================================# */
-
-
-    // 공지사항 닫을시 전체적인 layout 조정
-    $('.notice').on('click','.pal_close button', function() {
-    	$('.notice').velocity('slideUp', {
-    	  duration: 400
-    	});
-    	if($("input:checkbox[id='pal_check']").is(":checked")){
-			setCookieAt00("notice","done", 1);
-			$(".notice").css("display","none");
-		}
-    });
-
-	  // 화살표형 : 일시정지 버튼 클릭시
-	  $('.notice').on('click', '.sp-arrows .pause', function() {
-	    var $thisSlider = $("#" + ($(this).parent().parent().parent().attr('id'))).data('sliderPro');
-	    $thisSlider.settings.autoplay = false;
-	    $thisSlider.stopAutoplay();
-	    $thisSlider.update();
-
-	    $thisSlider.$arrows.find('.pause').removeClass('on');
-	    $thisSlider.$arrows.find('.play').addClass('on');
-
-	  });
-
-	  // 화살표형 : 시작 버튼 클릭시
-	  $(".notice").on("click", '.sp-arrows .play', function() {
-	    var $thisSlider = $("#" + ($(this).parent().parent().parent().attr('id'))).data('sliderPro');
-	    $thisSlider.settings.autoplay = true;
-	    $thisSlider.startAutoplay();
-	    $thisSlider.update();
-
-	    $thisSlider.$arrows.find('.pause').addClass('on')
-	    $thisSlider.$arrows.find('.play').removeClass('on');
-
-	  });
-
-    });
 
 	function getNoticeList() {
 
@@ -158,8 +114,6 @@
 					}
 				});
 	}
-
-
 
 	/*-------------------------------------------
 	  03. Product  Masonry (width)
@@ -252,8 +206,6 @@ window.location.href = "/home/product/productDetail?productNo=" + productNo
 
 });
 
-
-
 /*-------------------------------------------
 03. Product List Hit(width)
 --------------------------------------------- */
@@ -304,6 +256,49 @@ function productListHit() {
 
 $(document).ready(function(){
 
+	getNoticeList();
+
+	/* #=========================================#
+	| 슬라이드  - Slider Pro |
+	* https://github.com/bqworks/slider-pro
+	#=========================================# */
+
+
+	// 공지사항 닫을시 전체적인 layout 조정
+	$('.notice').on('click','.pal_close button', function() {
+		$('.notice').velocity('slideUp', {
+		  duration: 400
+		});
+		if($("input:checkbox[id='pal_check']").is(":checked")){
+			setCookieAt00("notice","done", 1);
+			$(".notice").css("display","none");
+		}
+	});
+
+	  // 화살표형 : 일시정지 버튼 클릭시
+	  $('.notice').on('click', '.sp-arrows .pause', function() {
+	    var $thisSlider = $("#" + ($(this).parent().parent().parent().attr('id'))).data('sliderPro');
+	    $thisSlider.settings.autoplay = false;
+	    $thisSlider.stopAutoplay();
+	    $thisSlider.update();
+
+	    $thisSlider.$arrows.find('.pause').removeClass('on');
+	    $thisSlider.$arrows.find('.play').addClass('on');
+
+	  });
+
+	  // 화살표형 : 시작 버튼 클릭시
+	  $(".notice").on("click", '.sp-arrows .play', function() {
+	    var $thisSlider = $("#" + ($(this).parent().parent().parent().attr('id'))).data('sliderPro');
+	    $thisSlider.settings.autoplay = true;
+	    $thisSlider.startAutoplay();
+	    $thisSlider.update();
+
+	    $thisSlider.$arrows.find('.pause').addClass('on')
+	    $thisSlider.$arrows.find('.play').removeClass('on');
+
+	  });
+
 	productListHit();
 
 	$('.product__menu button').on('click', function(event) {
@@ -313,6 +308,7 @@ $(document).ready(function(){
 	});
 
 });
+
 
 /*
 function eventInsert(){
