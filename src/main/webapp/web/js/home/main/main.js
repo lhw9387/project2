@@ -49,8 +49,32 @@
 
 	getCookie();
 
-	$(document).ready(function() {
+    // 공지사항 슬라이드
+	function noticeSlider(){
+		$('#notice_slider').sliderPro({
+		      width: '100%', // Default value: 500
+		      height: 50, // Default value: 300
+		      buttons: false, // Default value: true
+		      arrows: true,
+		      fadeArrows: false, // Default value : true - hover 시에만 화살표 표시할지
+		      autoplayOnHover: 'pause', // Default value: pause , other value : start , none
+		      autoplay: true, // Default value: true
+		      autoplayDelay: 3000, //3초, 단위:ms , Default value: 5000
+		      orientation: 'vertical', // Default value: 'horizontal' - 슬라이딩 방향 설정 vertical 시 세로 이동
+		      touchSwipeThreshold: 10, // Default value : 50 - 스와이핑시 얼마나 드래그 해야 이동할지 최소 px 설정
+		      init: function() {
+		        // puase , stop 버튼 그리기
+		        $('#notice_slider .sp-arrows').append("<button class='icon_controls_stop pause on' type='button' tabindex='1'><span class='blind'>정지</span>" +
+		          "</button><button class='icon_controls_play play' type='button' tabindex='1'><span class='blind'>재생</span></button>");
 
+		        $('#notice_slider .sp-arrows').children('.sp-arrow').attr('tabindex', 1);
+
+		        $('.notice_conts').show();
+		      }
+		    });
+	}
+
+	$(document).ready(function() {
 		getNoticeList();
 
     /* #=========================================#
@@ -58,28 +82,6 @@
     * https://github.com/bqworks/slider-pro
     #=========================================# */
 
-    // 공지사항 슬라이드
-    $('#notice_slider').sliderPro({
-      width: '100%', // Default value: 500
-      height: 50, // Default value: 300
-      buttons: false, // Default value: true
-      arrows: true,
-      fadeArrows: false, // Default value : true - hover 시에만 화살표 표시할지
-      autoplayOnHover: 'pause', // Default value: pause , other value : start , none
-      autoplay: true, // Default value: true
-      autoplayDelay: 3000, //3초, 단위:ms , Default value: 5000
-      orientation: 'vertical', // Default value: 'horizontal' - 슬라이딩 방향 설정 vertical 시 세로 이동
-      touchSwipeThreshold: 10, // Default value : 50 - 스와이핑시 얼마나 드래그 해야 이동할지 최소 px 설정
-      init: function() {
-        // puase , stop 버튼 그리기
-        $('#notice_slider .sp-arrows').append("<button class='icon_controls_stop pause on' type='button' tabindex='1'><span class='blind'>정지</span>" +
-          "</button><button class='icon_controls_play play' type='button' tabindex='1'><span class='blind'>재생</span></button>");
-
-        $('#notice_slider .sp-arrows').children('.sp-arrow').attr('tabindex', 1);
-
-        $('.notice_conts').show();
-      }
-    });
 
     // 공지사항 닫을시 전체적인 layout 조정
     $('.notice').on('click','.pal_close button', function() {
@@ -93,7 +95,7 @@
     });
 
 	  // 화살표형 : 일시정지 버튼 클릭시
-	  $(".sp-arrows .pause").on("click", function() {
+	  $('.notice').on('click', '.sp-arrows .pause', function() {
 	    var $thisSlider = $("#" + ($(this).parent().parent().parent().attr('id'))).data('sliderPro');
 	    $thisSlider.settings.autoplay = false;
 	    $thisSlider.stopAutoplay();
@@ -105,7 +107,7 @@
 	  });
 
 	  // 화살표형 : 시작 버튼 클릭시
-	  $(".sp-arrows .play").on("click", function() {
+	  $(".notice").on("click", '.sp-arrows .play', function() {
 	    var $thisSlider = $("#" + ($(this).parent().parent().parent().attr('id'))).data('sliderPro');
 	    $thisSlider.settings.autoplay = true;
 	    $thisSlider.startAutoplay();
@@ -149,6 +151,7 @@
 
 						$("#noticeList").append(output); //output에 담긴 내용을 html로 변환해서 div 영역에 출력
 
+						noticeSlider();
 					},
 					error : function(){
 						alert("통신실패!");
