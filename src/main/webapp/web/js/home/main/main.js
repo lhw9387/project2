@@ -51,7 +51,7 @@
 
 	$(document).ready(function() {
 
-
+		getNoticeList();
 
     /* #=========================================#
     | 슬라이드  - Slider Pro |
@@ -102,7 +102,6 @@
 	    $thisSlider.$arrows.find('.pause').removeClass('on');
 	    $thisSlider.$arrows.find('.play').addClass('on');
 
-	    console.log($thisSlider)
 	  });
 
 	  // 화살표형 : 시작 버튼 클릭시
@@ -115,17 +114,9 @@
 	    $thisSlider.$arrows.find('.pause').addClass('on')
 	    $thisSlider.$arrows.find('.play').removeClass('on');
 
-	    console.log($thisSlider)
 	  });
 
     });
-
-	$(document).ready(function() {
-
-		getNoticeList(); // 공지사항 리스트 HTML
-
-	});
-
 
 	function getNoticeList() {
 

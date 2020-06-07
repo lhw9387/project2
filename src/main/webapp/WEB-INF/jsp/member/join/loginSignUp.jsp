@@ -64,7 +64,41 @@
             pointer-events: none;
         }
     }
-
+    .custom_btn_login {
+    display: inline-block;
+    font-weight: normal;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.65rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    height: 50px;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+    margin-bottom: 0;
+    font-family: inherit;
+    width:calc(33.33333% - 1.4%) !important;
+	}
+	.custom_btn_login:hover {
+	box-shadow: 0px 9px 16px 0px rgba(153, 153, 153, 0.15) !important;
+    border-color: #e5e5e5;
+	}
+	.login_ps {
+	color:#ff4136;
+	font-size:12px;
+	padding:20px 0 40px 0;
+	text-align:center;
+	border-bottom:1px solid #e9e9e9;
+	}
 
 		</style>
 
@@ -218,6 +252,11 @@
 									<div class="kt-login__actions">
 										<button id="kt_login_signin_submit" class="btn btn-custom-blue btn-elevate kt-login__btn-primary">로그인</button>
 									</div>
+									<div class="kt-login__actions">
+										<button class="custom_btn_login" type="button" value="admin">관리자</button>
+										<button class="custom_btn_login" type="button" value="seller">판매자</button>
+										<button class="custom_btn_login" type="button" value="member">일반회원</button>
+									</div>
 								</form>
 							</div>
 							<div class="kt-login__signup">
@@ -327,6 +366,9 @@
 									</div>
 								</form>
 							</div>
+							<div class="login_ps">
+							위 각각의 버튼 클릭시, 해당 권한으로 자동 로그인이 됩니다.
+							</div>
 							<div class="kt-login__account">
 								<span class="kt-login__account-msg">
 									아직 회원이 아니세요?
@@ -351,7 +393,33 @@
 		<script src="https://abdu.space/TweenMax.min.js"></script>
 <!-- 		<script src="/web/lib2/tmart/js/morphSVGPlugin.js"</script> -->
 
-<script>;
+<script>
+
+$(function() {
+
+	$('.custom_btn_login').on('click', function(){
+			var loginType = $(this).val(),
+				  loginIdEl = $('#userId');
+
+		if(loginType == "admin"){
+			loginIdEl.val('admin0@naver.com');
+		} else if (loginType == "seller"){
+			loginIdEl.val('admin0@naver.com');
+		} else if (loginType == "member"){
+			loginIdEl.val('admin0@naver.com');
+		} else {
+			location.href('/member/join/loginSignUp');
+		}
+
+		$('#userPw').val('12345678!A');
+
+		$('#kt_login_signin_submit').trigger('click');
+
+	});
+
+});
+
+
 var errorMsg = '${errorMsg}'
 console.log(errorMsg)
 if(errorMsg != "" && errorMsg){
